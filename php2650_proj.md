@@ -148,38 +148,34 @@ paper](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-017-0
 
 # Survival Random Forest
 
-Idea: partitioning the covariate space recursively to form groups of
-subjects who are similar according to the time-to-event outcome.
-Minimizing a given impurity measure. Goal: To identify prognostic
-factors that are predictive of the time-to-event outcome.
 
 ## 1. Introduction
 
 Random survival forest (RSF) is a random forest method used to analyze right deletion survival data. It introduces new survival splitting rules for growing survival trees and new missing data algorithms for estimating missing data [1,2,15,16].
 
-RSF introduced the event retention principle for survival forests and used it to define overall mortality, which is a simple interpretable mortality measure that can be used as a predictive result [2]. 
+RSF introduced the event retention principle for survival forests and used it to define overall mortality (death rate), which is a simple interpretable death rate that can be used as a predictive result [2]. 
 
 ## 2. RSF framework
 
 We would follow the procedure below [2]:
 
-1.  Extract *B* bootstrap samples from the original data, and each
-    bootstrap sample excludes 37% of the data on average, which is
-    called out-of-bag data (OOB data).
+1.  Extract *B* bootstrap samples from the original data, and we need to exclude each
+    bootstrap sample 37% of the data share and share alike, which we usually
+    called them out-of-bag data (OOB data).
 
 2.  Construct a binary survival tree for each bootstrap sample. At each
-    node of the tree, p candidate variables are randomly selected, and
-    the node is split by using the candidate variables that maximize the
+    node of the tree, we are required to randomly choose *p* candidate variables, and we 
+    need to divide many new nodes with candidate variables that maximize the
     survival difference between the child nodes.
 
-3.  Grow the tree to full size with at least *d*<sub>0</sub> &gt; 0
-    number of events (deaths).
+3.  Grow the tree (forest) to full size with at least *d*<sub>0</sub> &gt; 0
+    number of events (like deaths).
 
 4.  Calculate cumulative risk function for each tree and obtain the mean
     value of the integrated cumulative risk function.
 
 5.  Calculate the integrated cumulative risk function prediction error
-    with OOB data.
+    with OOB data and IB data.
 
 ## 3. Ensemble cumulative hazard
 
@@ -197,8 +193,8 @@ turn, each child node is split, producing left and right child nodes
 with each split. The process is repeated recursively for each subsequent
 node [2,3].
 
-A good node segmentation can maximize the survival difference between
-the offspring. The optimal split for a node can be found by searching
+A good node split can maximize the survival difference between
+different children nodes. The optimal split for a node can be found by searching
 all possible x variables and split values c and selecting the x and c
 that maximize the survival difference. By maximizing survival
 differences, trees separate out different situations. Eventually, as the
@@ -219,7 +215,7 @@ Calculate log rank test:
 ![Figure](https://latex.codecogs.com/png.image?\dpi{110}&space;\bg_white&space;L(x,c)=\frac{\sum\limits_{i=1}^{N}(d_{i,1}-Y_{i,1}\frac{d_{i,1}}{Y_{i,1}})}{\sqrt{\sum\limits_{i=1}^{N}\frac{Y_{i,1}}{Y_{i}}(1-\frac{Y_{i,1}}{Y_{i}})\frac{Y_{i}-d_{i}}{Y_{i}-1}d_{i}}})
 
 
-Where, *j* = 1, 2 represents left and right child nodes,
+Where, *j* = 1, 2 represents left and right child nodes individually,
 
 *d*<sub>*i*, *j*</sub> is the number of events occurring in the sub-node
 *j* at the time *t*<sub>*i*</sub>,
