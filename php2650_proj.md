@@ -151,7 +151,7 @@ paper](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-017-0
 
 ## 1. Introduction
 
-Random survival forest (RSF) is a random forest method used to analyze right deletion survival data. It introduces new survival splitting rules for growing survival trees and new missing data algorithms for estimating missing data [1,2,15,16].
+Random survival forest (RSF) is a random forest method used to analyze right censored survival data. It introduces new survival splitting rules for growing survival trees and new missing data algorithms for estimating missing data [1,2,15,16].
 
 RSF introduced the event retention principle for survival forests and used it to define overall mortality (death rate), which is a simple interpretable death rate that can be used as a predictive result [2]. 
 
