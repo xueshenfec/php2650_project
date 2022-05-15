@@ -263,7 +263,7 @@ people who are alive at the moment *t*<sub>*l*, *h*</sub>; The
 cumulative risk function of the leaf node *h* is estimated as
 Nelson-Aalen estimate:
 
-<img width="435" alt="Screen Shot 2022-05-14 at 7 06 36 PM" src="https://user-images.githubusercontent.com/32623146/168450791-182e43c7-ecd0-48f3-bdf3-f52a7fd132ee.png">
+![image](https://user-images.githubusercontent.com/92004817/168452887-02040c31-bf9e-4f1e-b00a-46a396765a50.png)
 
 
  
