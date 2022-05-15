@@ -386,7 +386,7 @@ defined as:
  
 ## 5. Harrell’s C-index
 
-The intuition behind Harrell’s C-index is as follows [6-9]. For patient *i*,
+The intuition behind Harrell’s C-index is as follows [6-8]. For patient *i*,
 our risk model assigns a risk score *η*<sub>*i*</sub>. If our risk model
 is any good, patients who had shorter times-to-disease should have
 higher risk scores. Boiling this intuition down to two patients: the
@@ -482,7 +482,7 @@ It should be emphasized that although several literatures have shown that the ac
 
 [1] https://zhuanlan.zhihu.com/p/96996531
 
-[2]Hemant Ishwaran. Udaya B. Kogalur. Eugene H. Blackstone. Michael S. Lauer. "Random survival forests." Ann. Appl. Stat. 2 (3) 841 - 860, September 2008. https://arxiv.org/pdf/0811.1645.pdf
+[2] Hemant Ishwaran. Udaya B. Kogalur. Eugene H. Blackstone. Michael S. Lauer. "Random survival forests." Ann. Appl. Stat. 2 (3) 841 - 860, September 2008. https://arxiv.org/pdf/0811.1645.pdf
 
 [3] https://luminwin.github.io/randomForestSRC/articles/survival.html
 
