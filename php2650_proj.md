@@ -155,7 +155,7 @@ factors that are predictive of the time-to-event outcome.
 
 ## 1. Introduction
 
-Random survival forest (RSF) is a random forest method used to analyze right deletion survival data. It introduces new survival splitting rules for growing survival trees and new missing data algorithms for estimating missing data [1,2,16,17].
+Random survival forest (RSF) is a random forest method used to analyze right deletion survival data. It introduces new survival splitting rules for growing survival trees and new missing data algorithms for estimating missing data [1,2,15,16].
 
 RSF introduced the event retention principle for survival forests and used it to define overall mortality, which is a simple interpretable mortality measure that can be used as a predictive result [2]. 
 
@@ -430,7 +430,7 @@ Thus we have C-index here:
 <!-- <img src="https://render.githubusercontent.com/render/math?math=C=\frac{concordant\; pair}{concordant\; pair+ discordant\; pair}">
  -->
  
-Values of*C* near 0.5 indicate that the risk score predictions are no
+Values of *C* near 0.5 indicate that the risk score predictions are no
 better than a coin flip in determining which patient will live longer.
 Values near 1 indicate that the risk scores are good at determining
 which of two patients will have the disease first. Values near 0 means
@@ -468,45 +468,68 @@ This means that the prediction is not much better than a random guess.
 
 ## 6. Criteria for variable selection
 
-Since the random survival forest model selects many features of input data as its split nodes to build the model, the model retains miscellaneous variables. However, not all variables have positive significance in the process of model building. Therefore, through variable screening, we can understand the role of each variable in the process of model building [2,10]. 
+Since the random survival forest model selects many features of input data as its split nodes to build the model, the model retains miscellaneous variables. However, not all variables have positive significance in the process of model building. Therefore, through variable screening, we can understand the role of each variable in the process of model building [2,9]. 
 
-There are two methods to evaluate the importance of variables, namely VIMP (variable Importance) method and minimal depth method. The calculation principle of VIMP method is to put the out of bag data into the survival tree and make it randomly assigned to any child node. Then calculate the new total cumulative risk and VIMP is the difference between the original error rate and the new error rate. Therefore, the larger the VIMP is, the greater the impact of this variable on the accuracy of the model and the higher the importance of this variable. Different from VIMP, the minimum depth rule believes that the variable to be retained should be the variable that can distinguish the most data, namely the node closest to the root node. Therefore, the minimum depth method considers that variables with smaller values are more important to the model [10].
+There are two methods to evaluate the importance of variables, namely VIMP (variable Importance) method and minimal depth method. The calculation principle of VIMP method is to put the out of bag data into the survival tree and make it randomly assigned to any child node. Then calculate the new total cumulative risk and VIMP is the difference between the original error rate and the new error rate. Therefore, the larger the VIMP is, the greater the impact of this variable on the accuracy of the model and the higher the importance of this variable. Different from VIMP, the minimum depth rule believes that the variable to be retained should be the variable that can distinguish the most data, namely the node closest to the root node. Therefore, the minimum depth method considers that variables with smaller values are more important to the model [9,22].
 
 ## 7. Some discussions
 
-Compared with traditional survival analysis methods like Cox proportional risk regression, the prediction accuracy of random survival forest model is at least equal to or better than that of traditional survival analysis method [2,4,10]. The advantage of the random survival forest model is that it is not constrained by the proportional hazard assumption, log-linear assumption, and other conditions [2,15]. At the same time, the random survival forest has the advantages of the general random forest, which can prevent the over-fitting problem of its algorithm through two random sampling processes [10,11]. In addition, random survival forest can also perform survival analysis and variable screening on high-dimensional data and can also be applied to analysis of competing risks [10-13,18-20]. Therefore, the random survival forest model has more extensive research space.
+Compared with traditional survival analysis methods like Cox proportional risk regression, the prediction accuracy of random survival forest model is at least equal to or better than that of traditional survival analysis method [2,4,9]. The advantage of the random survival forest model is that it is not constrained by the proportional hazard assumption, log-linear assumption, and other conditions [2,14]. At the same time, the random survival forest has the advantages of the general random forest, which can prevent the over-fitting problem of its algorithm through two random sampling processes [9,10]. In addition, random survival forest can also perform survival analysis and variable screening on high-dimensional data and can also be applied to analysis of competing risks [9-12,17-19]. Therefore, the random survival forest model has more extensive research space.
 
-It should be emphasized that although several literatures have shown that the accuracy of the random survival forest model is better than or at least equal to that of the traditional survival model, the traditional survival analysis method is still indispensable when the data meet the requirements of the traditional survival analysis. As an emerging method, random survival forest also has a defect: it is susceptible to outliers. When analyzing data with outliers, the prediction accuracy is slightly inferior to traditional survival analysis methods [14]. Drawbacks of random survival forests also include the common drawbacks of random forests including a bias towards inclusion of variables with many split points [21-25]. This effect leads to a bias in resulting summary estimates such as variable importance [21,23,25]. Conditional inference forests (CIF) are known to reduce this selection bias by separating the algorithm for selecting the best covariate to split on from that of the best split point search [21,23,25,26]. Cox proportional hazard regression model for survival data analysis is not only used for prediction, but also can be more convenient to give the relationship between variables and survival outcome, so it should be combined with the traditional survival analysis and random survival forest model cannot completely replace the traditional survival analysis model [10,14].
+It should be emphasized that although several literatures have shown that the accuracy of the random survival forest model is better than or at least equal to that of the traditional survival model, the traditional survival analysis method is still indispensable when the data meet the requirements of the traditional survival analysis. As an emerging method, random survival forest also has a defect: it is susceptible to outliers. When analyzing data with outliers, the prediction accuracy is slightly inferior to traditional survival analysis methods [13]. Drawbacks of random survival forests also include the common drawbacks of random forests including a bias towards inclusion of variables with many split points [20-24]. This effect leads to a bias in resulting summary estimates such as variable importance [20,22,24]. Conditional inference forests (CIF) are known to reduce this selection bias by separating the algorithm for selecting the best covariate to split on from that of the best split point search [21,23,25,26]. Cox proportional hazard regression model for survival data analysis is not only used for prediction, but also can be more convenient to give the relationship between variables and survival outcome, so it should be combined with the traditional survival analysis and random survival forest model cannot completely replace the traditional survival analysis model [9,13].
 
 ## 8. Reference
 
 [1] https://zhuanlan.zhihu.com/p/96996531
+
 [2]Hemant Ishwaran. Udaya B. Kogalur. Eugene H. Blackstone. Michael S. Lauer. "Random survival forests." Ann. Appl. Stat. 2 (3) 841 - 860, September 2008. https://arxiv.org/pdf/0811.1645.pdf
+
 [3] https://luminwin.github.io/randomForestSRC/articles/survival.html
+
 [4] https://zhuanlan.zhihu.com/p/463015417
+
 [5] https://square.github.io/pysurvival/models/survival_forest.html
+
 [6] https://statisticaloddsandends.wordpress.com/2019/10/26/what-is-harrells-c-index/
-[7] Harrell Jr, F. E. et al. (1982). Evaluating the yield of medical tests.
-[8] Schmid, M. et al. (2016). On the use of Harrell’s C for clinical risk prediction via random survival forests.
-[9] Statistics How To. What is a C-Statistic?
-[10] Chen Z, Xu HM, Li ZX, Zhang Y, Zhou T, You WC, Pan KF, Li WQ. [Random survival forest: applying machine learning algorithm in survival analysis of biomedical data]. Zhonghua Yu Fang Yi Xue Za Zhi. 2021 Jan 6;55(1):104-109. Chinese. doi: 10.3760/cma.j.cn112150-20200911-01197. PMID: 33455140.
-[11] StroblC, MalleyJ, TutzG. An introduction to recursive partitioning: rationale, application, and characteristics of classification and regression trees, bagging, and random forests[J]. Psychol Methods, 2009, 14(4):323-348. DOI: 10.1037/a0016973.
-[12] IshwaranH, GerdsTA, KogalurUB, et al. Random survival forests for competing risks[J]. Biostatistics, 2014, 15(4):757-773. DOI: 10.1093/biostatistics/kxu010.
-9
-[13] WangH, LiG. A Selective Review on Random Survival Forests for High Dimensional Data[J]. Quant Biosci, 2017, 36(2):85-96. DOI: 10.22283/qbs.2017.36.2.85.
-[14] MiaoF, CaiYP, ZhangYT, et al. Is Random Survival Forest an Alternative to Cox Proportional Model on Predicting Cardiovascular Disease?[J]. Ifmbe Proceedings, 2015, 45:740-743.
-[15] Ehrlinger J. ggRandomForests Exploring random forest survival. R Vignette. 2016.
-[16] Breiman L, Friedman J, Stone CJ, Olshen RA. Classification and regression trees. Belmont: CRC press; 1984.
-[17] Breiman L. Random forests. Mach Learn. 2001; 45(1):5–32.
-[18] Fernández T, Rivera N, Teh YW. Gaussian processes for survival analysis. In: Advances in Neural Information Processing Systems.New York: Curran Associates: 2016. p. 5015–023.
-[19] Taylor JM. Random survival forests. J Thorac Oncol. 2011; 6(12):1974–5.
-[20] Bou-Hamad I, Larocque D, Ben-Ameur H, et al. A review of survival trees. Stat Surv. 2011; 5:44–71.
-[21] Nasejje JB, Mwambi H, Dheda K, Lesosky M. A comparison of the conditional inference survival forest model to random survival forests based on a simulation study as well as on two applications with time-to-event data. BMC Med Res Methodol. 2017 Jul 28;17(1):115. doi: 10.1186/s12874-017-0383-8. PMID: 28754093; PMCID: PMC5534080.
-[22] Ziegler A, König IR. Mining data with random forests: current options for real-world applications. Wiley Interdiscip Rev Data Min Knowl Disc. 2014; 4(1):55–63.
-[23] Strobl C, Boulesteix AL, Zeileis A, Hothorn T. Bias in random forest variable importance measures: Illustrations, sources and a solution. BMC Bioinforma. 2007; 8(1):1.
-[24] Loh WY. Fifty years of classification and regression trees. Int Stat Rev. 2014; 82(3):329–48.
-[25] Wright MN, Dankowski T, Ziegler A. Unbiased split variable selection for random survival forests using maximally selected rank statistics. Stat Med. 2017; 36(8):1272–84. doi:10.1002/sim.7212.sim.7212.
-[26] Das A, Abdel-Aty M, Pande A. Using conditional inference forests to identify the factors affecting crash severity on arterial corridors. J Saf Res. 2009; 40(4):317–27.
+
+[7] Harrell Jr, F. E. et al. (1982). https://jamanetwork.com/journals/jama/article-abstract/372568
+
+[8] Schmid, M. et al. (2016). https://arxiv.org/pdf/1507.03092.pdf
+
+[9] Chen Z, Xu HM, Li ZX, Zhang Y, Zhou T, You WC, Pan KF, Li WQ. [Random survival forest: applying machine learning algorithm in survival analysis of biomedical data]. Zhonghua Yu Fang Yi Xue Za Zhi. 2021 Jan 6;55(1):104-109. Chinese. doi: 10.3760/cma.j.cn112150-20200911-01197. PMID: 33455140.
+
+[10] StroblC, MalleyJ, TutzG. An introduction to recursive partitioning: rationale, application, and characteristics of classification and regression trees, bagging, and random forests[J]. Psychol Methods, 2009, 14(4):323-348. DOI: 10.1037/a0016973.
+
+[11] IshwaranH, GerdsTA, KogalurUB, et al. Random survival forests for competing risks[J]. Biostatistics, 2014, 15(4):757-773. DOI: 10.1093/biostatistics/kxu010.
+
+[12] WangH, LiG. A Selective Review on Random Survival Forests for High Dimensional Data[J]. Quant Biosci, 2017, 36(2):85-96. DOI: 10.22283/qbs.2017.36.2.85.
+
+[13] MiaoF, CaiYP, ZhangYT, et al. Is Random Survival Forest an Alternative to Cox Proportional Model on Predicting Cardiovascular Disease?[J]. Ifmbe Proceedings, 2015, 45:740-743.
+
+[14] Ehrlinger J. ggRandomForests Exploring random forest survival. R Vignette. 2016.
+
+[15] Breiman L, Friedman J, Stone CJ, Olshen RA. Classification and regression trees. Belmont: CRC press; 1984.
+
+[16] Breiman L. Random forests. Mach Learn. 2001; 45(1):5–32.
+
+[17] Fernández T, Rivera N, Teh YW. Gaussian processes for survival analysis. In: Advances in Neural Information Processing Systems.New York: Curran Associates: 2016. p. 5015–023.
+
+[18] Taylor JM. Random survival forests. J Thorac Oncol. 2011; 6(12):1974–5.
+
+[19] Bou-Hamad I, Larocque D, Ben-Ameur H, et al. A review of survival trees. Stat Surv. 2011; 5:44–71.
+
+[20] Nasejje JB, Mwambi H, Dheda K, Lesosky M. A comparison of the conditional inference survival forest model to random survival forests based on a simulation study as well as on two applications with time-to-event data. BMC Med Res Methodol. 2017 Jul 28;17(1):115. doi: 10.1186/s12874-017-0383-8. PMID: 28754093; PMCID: PMC5534080.
+
+[21] Ziegler A, König IR. Mining data with random forests: current options for real-world applications. Wiley Interdiscip Rev Data Min Knowl Disc. 2014; 4(1):55–63.
+
+[22] Strobl C, Boulesteix AL, Zeileis A, Hothorn T. Bias in random forest variable importance measures: Illustrations, sources and a solution. BMC Bioinforma. 2007; 8(1):1.
+
+[23] Loh WY. Fifty years of classification and regression trees. Int Stat Rev. 2014; 82(3):329–48.
+
+[24] Wright MN, Dankowski T, Ziegler A. Unbiased split variable selection for random survival forests using maximally selected rank statistics. Stat Med. 2017; 36(8):1272–84. doi:10.1002/sim.7212.sim.7212.
+
+[25] Das A, Abdel-Aty M, Pande A. Using conditional inference forests to identify the factors affecting crash severity on arterial corridors. J Saf Res. 2009; 40(4):317–27.
+
 
 
 # Application in R
